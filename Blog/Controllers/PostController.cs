@@ -20,15 +20,15 @@ namespace Blog.Controllers
                 },
                 new Models.Post
                 {
-                    Titulo = "Harry Potter",
-                    Resumo = "Bruxo",
+                    Titulo = "Interstellar",
+                    Resumo = "Ficção",
                     Categoria = "Filme"
                 },
                 new Models.Post
                 {
-                    Titulo = "Harry Potter",
-                    Resumo = "Bruxo",
-                    Categoria = "Filme"
+                    Titulo = "The Big Bang Theory",
+                    Resumo = "Comédia Nerd",
+                    Categoria = "Série"
                 },
             };
 
