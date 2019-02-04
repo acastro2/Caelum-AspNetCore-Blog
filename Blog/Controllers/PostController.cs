@@ -34,7 +34,7 @@ namespace Blog.Controllers
 
             ViewBag.Posts = lista;
 
-            return View();
+            return View(lista);
         }
     }
 }
