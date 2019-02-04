@@ -32,7 +32,7 @@ namespace Blog.Controllers
                 },
             };
 
-            ViewBag.Posts = lista;
+            //ViewBag.Posts = lista;
 
             return View(lista);
         }
