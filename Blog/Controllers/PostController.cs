@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
     public class PostController : Controller
     {
-        public IActionResult Index()
+        private List<Models.Post> Lista;
+
+        public PostController()
         {
-            var lista = new List<Models.Post>
+            Lista = new List<Models.Post>
             {
                 new Models.Post
                 {
@@ -31,10 +30,23 @@ namespace Blog.Controllers
                     Categoria = "Série"
                 },
             };
+        }
 
-            //ViewBag.Posts = lista;
+        public IActionResult Index()
+        {
+            return View(Lista);
+        }
 
-            return View(lista);
+        public IActionResult Novo()
+        {
+            return View();
+        }
+
+        public IActionResult Adiciona(Models.Post novo)
+        {
+            Lista.Add(novo);
+
+            return View("Index", Lista);
         }
     }
 }
