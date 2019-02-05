@@ -5,36 +5,16 @@ namespace Blog.Controllers
 {
     public class PostController : Controller
     {
-        private List<Models.Post> Lista;
+        private DAO.PostDAO Dao;
 
         public PostController()
         {
-            Lista = new List<Models.Post>
-            {
-                new Models.Post
-                {
-                    Titulo = "Harry Potter",
-                    Resumo = "Bruxo",
-                    Categoria = "Filme"
-                },
-                new Models.Post
-                {
-                    Titulo = "Interstellar",
-                    Resumo = "Ficção",
-                    Categoria = "Filme"
-                },
-                new Models.Post
-                {
-                    Titulo = "The Big Bang Theory",
-                    Resumo = "Comédia Nerd",
-                    Categoria = "Série"
-                },
-            };
+           Dao = new DAO.PostDAO();
         }
 
         public IActionResult Index()
         {
-            return View(Lista);
+            return View(Dao.Lista());
         }
 
         public IActionResult Novo()
@@ -45,9 +25,9 @@ namespace Blog.Controllers
         [HttpPost]
         public IActionResult Adiciona(Models.Post novo)
         {
-            Lista.Add(novo);
+            Dao.Insere(novo);
 
-            return View("Index", Lista);
+            return RedirectToAction("Index");
         }
     }
 }
