@@ -42,6 +42,7 @@ namespace Blog.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Adiciona(Models.Post novo)
         {
             Lista.Add(novo);
