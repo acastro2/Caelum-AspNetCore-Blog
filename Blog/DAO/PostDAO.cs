@@ -11,20 +11,22 @@ namespace Blog.DAO
 
             using (var connection = Infra.ConnectionFactory.GetConnection())
             {
-                var command = connection.CreateCommand();
-                command.CommandText = "SELECT Id, Titulo, Resumo, Categoria FROM Post";
-
-                using (var reader = command.ExecuteReader())
+                using (var command = connection.CreateCommand())
                 {
-                    while (reader.Read())
+                    command.CommandText = "SELECT Id, Titulo, Resumo, Categoria FROM Post";
+
+                    using (var reader = command.ExecuteReader())
                     {
-                        lista.Add(new Models.Post
+                        while (reader.Read())
                         {
-                            Id = Convert.ToInt32(reader["id"]),
-                            Titulo = Convert.ToString(reader["titulo"]),
-                            Resumo = Convert.ToString(reader["resumo"]),
-                            Categoria = Convert.ToString(reader["categoria"])
-                        });
+                            lista.Add(new Models.Post
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                Titulo = Convert.ToString(reader["titulo"]),
+                                Resumo = Convert.ToString(reader["resumo"]),
+                                Categoria = Convert.ToString(reader["categoria"])
+                            });
+                        }
                     }
                 }
             }
@@ -36,14 +38,16 @@ namespace Blog.DAO
         {
             using (var connection = Infra.ConnectionFactory.GetConnection())
             {
-                var command = connection.CreateCommand();
-                command.CommandText = "INSERT INTO Post (Titulo, Resumo, Categoria) VALUES (@titulo, @resumo, @categoria)";
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "INSERT INTO Post (Titulo, Resumo, Categoria) VALUES (@titulo, @resumo, @categoria)";
 
-                command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@titulo", post.Titulo));
-                command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@resumo", post.Resumo));
-                command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@categoria", post.Categoria));
+                    command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@titulo", post.Titulo));
+                    command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@resumo", post.Resumo));
+                    command.Parameters.Add(new System.Data.SqlClient.SqlParameter("@categoria", post.Categoria));
 
-                command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
+                }
             }
         }
     }
