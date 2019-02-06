@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace Blog.Controllers
 {
@@ -9,7 +8,7 @@ namespace Blog.Controllers
 
         public PostController()
         {
-           Dao = new DAO.PostDAO();
+            Dao = new DAO.PostDAO();
         }
 
         public IActionResult Index()
@@ -28,6 +27,11 @@ namespace Blog.Controllers
             Dao.Insere(novo);
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Categoria([Bind(Prefix = "id")] string categoria)
+        {
+            return View("Index", Dao.FiltraPorCategoria(categoria));
         }
     }
 }

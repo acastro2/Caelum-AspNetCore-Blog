@@ -13,6 +13,19 @@ namespace Blog.DAO
             }
         }
 
+        public IList<Models.Post> FiltraPorCategoria(string categoria)
+        {
+            if (string.IsNullOrWhiteSpace(categoria))
+            {
+                return Lista();
+            }
+
+            using (var context = new Infra.BlogContext())
+            {
+                return context.Posts.Where(p => p.Categoria.Contains(categoria, System.StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
+        }
+
         public void Insere(Models.Post post)
         {
             using (var context = new Infra.BlogContext())
