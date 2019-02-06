@@ -33,5 +33,12 @@ namespace Blog.Controllers
         {
             return View("Index", Dao.FiltraPorCategoria(categoria));
         }
+
+        public IActionResult RemovePost(int id)
+        {
+            Dao.Remove(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }

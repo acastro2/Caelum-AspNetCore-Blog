@@ -35,5 +35,22 @@ namespace Blog.DAO
                 context.SaveChanges();
             }
         }
+
+        public void Remove(int id)
+        {
+            using (var context = new Infra.BlogContext())
+            {
+                var post = context.Posts.Find(id);
+
+                if (post == null)
+                {
+                    return;
+                }
+
+                context.Posts.Remove(post);
+
+                context.SaveChanges();
+            }
+        }
     }
 }
