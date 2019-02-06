@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Blog.DAO
@@ -48,6 +49,24 @@ namespace Blog.DAO
                 }
 
                 context.Posts.Remove(post);
+
+                context.SaveChanges();
+            }
+        }
+
+        public Models.Post BuscaPorId(int id)
+        {
+            using (var context = new Infra.BlogContext())
+            {
+                return context.Posts.Find(id);
+            }
+        }
+
+        public void Atualiza(Models.Post post)
+        {
+            using (var context = new Infra.BlogContext())
+            {
+                context.Entry(post).State = EntityState.Modified;
 
                 context.SaveChanges();
             }

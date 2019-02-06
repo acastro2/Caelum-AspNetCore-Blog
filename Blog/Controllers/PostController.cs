@@ -40,5 +40,18 @@ namespace Blog.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Visualiza(int id)
+        {
+            return View(Dao.BuscaPorId(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditaPost(Models.Post novo)
+        {
+            Dao.Atualiza(novo);
+
+            return RedirectToAction("Index");
+        }
     }
 }
