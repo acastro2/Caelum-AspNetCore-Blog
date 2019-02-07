@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog.Models
@@ -7,7 +8,10 @@ namespace Blog.Models
     public class Post
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Título é obrigatório")]
+        [StringLength(40)]
         public string Titulo { get; set; }
+        [Required(ErrorMessage = "Resumo é obrigatório")]
         public string Resumo { get; set; }
         public string Categoria { get; set; }
         public DateTime? DataPublicacao { get; set; }
