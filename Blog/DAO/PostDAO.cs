@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -66,6 +67,26 @@ namespace Blog.DAO
         {
             using (var context = new Infra.BlogContext())
             {
+                context.Entry(post).State = EntityState.Modified;
+
+                context.SaveChanges();
+            }
+        }
+
+        public void Publica(int id)
+        {
+            using (var context = new Infra.BlogContext())
+            {
+                var post = context.Posts.Find(id);
+
+                if (post == null)
+                {
+                    return;
+                }
+
+                post.Publicado = true;
+                post.DataPublicacao = DateTime.Now;
+
                 context.Entry(post).State = EntityState.Modified;
 
                 context.SaveChanges();
