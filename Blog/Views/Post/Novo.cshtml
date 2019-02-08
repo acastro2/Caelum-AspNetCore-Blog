@@ -11,25 +11,24 @@
     <title>Novo</title>
 </head>
 <body>
-    <form action="/Post/Adiciona" method="post">
-        <label>
-            Titulo: <input name="Titulo" value="@Model.Titulo" maxlength="50" required />
-        </label>
-        @Html.ValidationMessage("Titulo")
-        <label>
-            Resumo: <input name="Resumo" value="@Model.Resumo" required />
-        </label>
-        @Html.ValidationMessage("Resumo")
-        <label>
-            Categoria: <input name="Categoria" value="@Model.Categoria" />
-        </label>
-        @Html.ValidationMessage("Categoria")
+    @using (Html.BeginForm("Adiciona", "Post"))
+    {
+        @Html.LabelFor(p => p.Titulo)
+        @Html.TextBoxFor(p => p.Titulo)
+        @Html.ValidationMessageFor(p => p.Titulo)
+
+        @Html.LabelFor(p => p.Resumo)
+        @Html.TextBoxFor(p => p.Resumo)
+        @Html.ValidationMessageFor(p => p.Resumo)
+
+        @Html.LabelFor(p => p.Categoria)
+        @Html.TextBoxFor(p => p.Categoria)
+        @Html.ValidationMessageFor(p => p.Categoria)
+
         <button type="submit">Cadastrar</button>
-    </form>
+    }
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script src="~/js/jquery.validate.min.js"></script>
-    <script>
-        $("form").validate();
-    </script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>
