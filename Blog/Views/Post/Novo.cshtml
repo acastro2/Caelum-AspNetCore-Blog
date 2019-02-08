@@ -15,15 +15,15 @@
         <label>
             Titulo: <input name="Titulo" value="@Model.Titulo" maxlength="50" required />
         </label>
-        @Html.ValidationMessage("Titulo");
+        @Html.ValidationMessage("Titulo")
         <label>
             Resumo: <input name="Resumo" value="@Model.Resumo" required />
         </label>
-        @Html.ValidationMessage("Resumo");
+        @Html.ValidationMessage("Resumo")
         <label>
             Categoria: <input name="Categoria" value="@Model.Categoria" />
         </label>
-        @Html.ValidationMessage("Categoria");
+        @Html.ValidationMessage("Categoria")
         <button type="submit">Cadastrar</button>
     </form>
     <script src="~/js/jquery-3.3.1.min.js"></script>

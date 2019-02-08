@@ -14,17 +14,17 @@
     <form action="/Post/EditaPost" method="post">
         <input type="hidden" name="Id" value="@Model.Id" />
         <label>
-            Titulo: <input name="Titulo" value="@Model.Titulo" maxlength="50" required data-msg-required="Título é obrigatório"/>
+            Titulo: <input name="Titulo" value="@Model.Titulo" maxlength="50" required data-msg-required="Título é obrigatório" />
         </label>
-        @Html.ValidationMessage("Titulo");
+        @Html.ValidationMessage("Titulo")
         <label>
             Resumo: <input name="Resumo" value="@Model.Resumo" required />
         </label>
-        @Html.ValidationMessage("Resumo");
+        @Html.ValidationMessage("Resumo")
         <label>
             Categoria: <input name="Categoria" value="@Model.Categoria" />
         </label>
-        @Html.ValidationMessage("Categoria");
+        @Html.ValidationMessage("Categoria")
         <input type="hidden" name="DataPublicacao" value="@Model.DataPublicacao" />
         <input type="hidden" name="Publicado" value="@Model.Publicado.ToString()" />
         <button type="submit">Alterar</button>
