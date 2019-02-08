@@ -92,5 +92,19 @@ namespace Blog.DAO
                 context.SaveChanges();
             }
         }
+
+        public IList<string> ListaCategoriasQueContemTermo(string termo)
+        {
+            if (string.IsNullOrWhiteSpace(termo))
+            {
+                return Lista().Select(p => p.Categoria).Distinct().ToList();
+            }
+
+            using (var context = new Infra.BlogContext())
+            {
+                return context.Posts.Where(p => p.Categoria.Contains(termo, StringComparison.CurrentCultureIgnoreCase))
+                    .Select(p => p.Categoria).Distinct().ToList();
+            }
+        }
     }
 }

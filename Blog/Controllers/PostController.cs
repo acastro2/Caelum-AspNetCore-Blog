@@ -70,5 +70,13 @@ namespace Blog.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult CategoriaAutocomplete(string termoDigitado)
+        {
+            var model = Dao.ListaCategoriasQueContemTermo(termoDigitado);
+
+            return Json(model);
+        }
     }
 }
