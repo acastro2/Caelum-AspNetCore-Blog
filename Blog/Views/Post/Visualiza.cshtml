@@ -14,11 +14,11 @@
     <form action="/Post/EditaPost" method="post">
         <input type="hidden" name="Id" value="@Model.Id" />
         <label>
-            Titulo: <input name="Titulo" value="@Model.Titulo" />
+            Titulo: <input name="Titulo" value="@Model.Titulo" maxlength="50" required data-msg-required="Título é obrigatório"/>
         </label>
         @Html.ValidationMessage("Titulo");
         <label>
-            Resumo: <input name="Resumo" value="@Model.Resumo" />
+            Resumo: <input name="Resumo" value="@Model.Resumo" required />
         </label>
         @Html.ValidationMessage("Resumo");
         <label>
@@ -29,5 +29,10 @@
         <input type="hidden" name="Publicado" value="@Model.Publicado.ToString()" />
         <button type="submit">Alterar</button>
     </form>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script>
+        $("form").validate();
+    </script>
 </body>
 </html>
