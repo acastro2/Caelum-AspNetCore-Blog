@@ -1,28 +1,17 @@
-﻿@model Blog.Models.Post
-@{
-    Layout = null;
+﻿@model Post;
+
+@using (Html.BeginForm("EditaPost", "Post"))
+{
+    @Html.EditorFor(p => p);
+
+    @Html.HiddenFor(p => p.Id)
+    @Html.HiddenFor(p => p.Publicado)
+    @Html.HiddenFor(p => p.DataPublicacao)
+
+    <button type="submit">Alterar</button>
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Visualiza</title>
-</head>
-<body>
-    @using (Html.BeginForm("EditaPost", "Post"))
-    {
-        @Html.EditorFor(p => p);
-
-        @Html.HiddenFor(p => p.Id)
-        @Html.HiddenFor(p => p.Publicado)
-        @Html.HiddenFor(p => p.DataPublicacao)
-
-        <button type="submit">Alterar</button>
-    }
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/jquery.validate.unobtrusive.js"></script>
-</body>
-</html>
+@section Scripts
+{
+    @Html.Partial("_Scripts")
+}

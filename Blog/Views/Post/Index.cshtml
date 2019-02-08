@@ -1,53 +1,39 @@
 ﻿@model List<Blog.Models.Post>;
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Incluir Post", "Novo")
-    </p>
-    <table>
-        <thead>
+<p>
+    @Html.ActionLink("Incluir Post", "Novo")
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Resumo</th>
+            <th>Categoria</th>
+            <th>Publicação?</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
             <tr>
-                <th>Id</th>
-                <th>Titulo</th>
-                <th>Resumo</th>
-                <th>Categoria</th>
-                <th>Publicação?</th>
-                <th>Ação</th>
+                <td>@p.Id</td>
+                <td>@Html.ActionLink(p.Titulo, "Visualiza", new { id = p.Id })</td>
+                <td>@p.Resumo</td>
+                <td>@p.Categoria</td>
+                <td>
+                    @if (p.Publicado)
+                    {
+                        @Html.Raw($"{p.DataPublicacao:dd/MM/yyyy}");
+                    }
+                    else
+                    {
+                        @Html.Raw("Não");
+                    }
+                </td>
+                <td>@Html.ActionLink("Remover", "RemovePost", new { id = p.Id })</td>
+                <td>@Html.ActionLink("Publicar", "PublicaPost", new { id = p.Id })</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var p in Model)
-            {
-                <tr>
-                    <td>@p.Id</td>
-                    <td>@Html.ActionLink(p.Titulo, "Visualiza", new { id = p.Id })</td>
-                    <td>@p.Resumo</td>
-                    <td>@p.Categoria</td>
-                    <td>
-                        @if (p.Publicado)
-                        {
-                            @Html.Raw($"{p.DataPublicacao:dd/MM/yyyy}");
-                        }
-                        else
-                        {
-                            @Html.Raw("Não");
-                        }
-                    </td>
-                    <td>@Html.ActionLink("Remover", "RemovePost", new { id = p.Id })</td>
-                    <td>@Html.ActionLink("Publicar", "PublicaPost", new { id = p.Id })</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
-</html>
+        }
+    </tbody>
+</table>

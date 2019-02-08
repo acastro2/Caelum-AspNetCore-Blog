@@ -1,40 +1,13 @@
-﻿@model Blog.Models.Post
-@{
-    Layout = null;
+﻿@model Post;
+
+@using (Html.BeginForm("Adiciona", "Post"))
+{
+    @Html.EditorFor(p => p);
+
+    <button type="submit">Cadastrar</button>
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Novo</title>
-    <link href="~/css/jquery-ui.min.css" rel="stylesheet" />
-</head>
-<body>
-    @using (Html.BeginForm("Adiciona", "Post"))
-    {
-        @Html.EditorFor(p => p);
-
-        <button type="submit">Cadastrar</button>
-    }
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/jquery.validate.unobtrusive.js"></script>
-    <script src="~/js/jquery-ui.min.js"></script>
-    <script>
-        $("input[name='Categoria']").autocomplete({
-            source: function (request, response) {
-                $.post(
-                    "@Url.Action("CategoriaAutocomplete")",
-                    {
-                        termoDigitado: request.term
-                    }, function (data) {
-                        response(data);
-                    });
-
-            }
-        });
-    </script>
-</body>
-</html>
+@section Scripts
+{
+    @Html.Partial("_Scripts")
+}
