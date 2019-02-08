@@ -12,7 +12,7 @@
 </head>
 <body>
     <p>
-        <a href="/Post/Novo">Cadastrar Novo Post</a>
+        @Html.ActionLink("Incluir Post", "Novo")
     </p>
     <table>
         <thead>
@@ -30,11 +30,11 @@
             {
                 <tr>
                     <td>@p.Id</td>
-                    <td><a href="/Post/Visualiza/@p.Id">@p.Titulo</a></td>
+                    <td>@Html.ActionLink(p.Titulo, "Visualiza", new { id = p.Id })</td>
                     <td>@p.Resumo</td>
                     <td>@p.Categoria</td>
                     <td>
-                        @if(p.Publicado)
+                        @if (p.Publicado)
                         {
                             @Html.Raw($"{p.DataPublicacao:dd/MM/yyyy}");
                         }
@@ -43,8 +43,8 @@
                             @Html.Raw("Não");
                         }
                     </td>
-                    <td><a href="/Post/RemovePost/@p.Id">Remover</a></td>
-                    <td><a href="/Post/PublicaPost/@p.Id">Publicar</a></td>
+                    <td>@Html.ActionLink("Remover", "RemovePost", new { id = p.Id })</td>
+                    <td>@Html.ActionLink("Publicar", "PublicaPost", new { id = p.Id })</td>
                 </tr>
             }
         </tbody>
