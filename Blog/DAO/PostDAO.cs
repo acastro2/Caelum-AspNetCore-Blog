@@ -15,6 +15,17 @@ namespace Blog.DAO
             }
         }
 
+        public IEnumerable<Models.Post> ListaPublicados()
+        {
+            using (var context = new Infra.BlogContext())
+            {
+                return context.Posts.Where(p => p.Publicado)
+                                    .OrderByDescending(p => p.DataPublicacao)
+                                    .ToList();
+            }
+        }
+
+
         public IList<Models.Post> FiltraPorCategoria(string categoria)
         {
             if (string.IsNullOrWhiteSpace(categoria))
