@@ -9,12 +9,14 @@
     <link href="~/css/estilo.css" rel="stylesheet" />
 </head>
 <body>
-    <header></header>
+    @Html.Partial("Cabecalho")
+    <div class="container clearfix">
     <main>
         @RenderBody()
     </main>
-    <aside></aside>
-    <footer></footer>
+    @Html.Partial("Lateral")
+    </div>
+    @Html.Partial("Rodape")
     @RenderSection("Scripts", false)
 </body>
 </html>
