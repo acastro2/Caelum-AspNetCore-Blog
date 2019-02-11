@@ -1,13 +1,17 @@
 ﻿@model Blog.Models.Post
 
-@Html.LabelFor(p => p.Titulo)
-@Html.TextBoxFor(p => p.Titulo)
-@Html.ValidationMessageFor(p => p.Titulo)
-
-@Html.LabelFor(p => p.Resumo)
-@Html.TextAreaFor(p => p.Resumo)
-@Html.ValidationMessageFor(p => p.Resumo)
-
-@Html.LabelFor(p => p.Categoria)
-@Html.TextBoxFor(p => p.Categoria)
-@Html.ValidationMessageFor(p => p.Categoria)
+<div class="form-group">
+    @Html.LabelFor(p => p.Titulo)
+    @Html.TextBoxFor(p => p.Titulo, null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Titulo)
+</div>
+<div class="form-group">
+    @Html.LabelFor(p => p.Resumo)
+    @Html.TextAreaFor(p => p.Resumo, 7, 1, new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Resumo)
+</div>
+<div class="form-group">
+    @Html.LabelFor(p => p.Categoria)
+    @Html.TextBoxFor(p => p.Categoria, null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Categoria)
+</div>
