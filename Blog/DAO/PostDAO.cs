@@ -25,7 +25,6 @@ namespace Blog.DAO
             }
         }
 
-
         public IList<Models.Post> FiltraPorCategoria(string categoria)
         {
             if (string.IsNullOrWhiteSpace(categoria))
@@ -35,7 +34,20 @@ namespace Blog.DAO
 
             using (var context = new Infra.BlogContext())
             {
-                return context.Posts.Where(p => p.Categoria.Contains(categoria, System.StringComparison.CurrentCultureIgnoreCase)).ToList();
+                return context.Posts.Where(p => p.Categoria.Contains(categoria, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
+        }
+
+        public IList<Models.Post> BuscaPeloTermo(string termo)
+        {
+            if (string.IsNullOrWhiteSpace(termo))
+            {
+                return Lista();
+            }
+
+            using (var context = new Infra.BlogContext())
+            {
+                return context.Posts.Where(p => p.Publicado && (p.Categoria.Contains(termo, StringComparison.CurrentCultureIgnoreCase) || p.Titulo.Contains(termo, StringComparison.CurrentCultureIgnoreCase))).ToList();
             }
         }
 

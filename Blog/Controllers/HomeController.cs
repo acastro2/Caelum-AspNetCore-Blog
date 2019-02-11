@@ -15,5 +15,12 @@ namespace Blog.Controllers
         {
             return View(Dao.ListaPublicados());
         }
+
+        public IActionResult BuscaPeloTermo(string termo)
+        {
+            ViewBag.Termo = termo;
+
+            return View("Index", Dao.BuscaPeloTermo(termo));
+        }
     }
 }

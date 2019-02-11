@@ -1,6 +1,18 @@
 ﻿@model IList<Post>
 
 <div>
+    @if (ViewBag.Termo != null)
+    {
+        <h3>Resultados da busca por @ViewBag.Termo</h3>
+    }
+
+    @if (!Model.Any())
+    {
+        <article>
+            <h1>Nenhum resultado encontrado para a busca</h1>
+        </article>
+    }
+
     @foreach (var p in Model)
     {
         <article>
@@ -8,4 +20,5 @@
             <p>@p.Resumo</p>
         </article>
     }
+
 </div>
