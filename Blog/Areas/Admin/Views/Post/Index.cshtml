@@ -1,0 +1,44 @@
+﻿@model List<Blog.Models.Post>;
+<h2>Lista de Posts</h2>
+<p>
+    @Html.ActionLink("Incluir Post", "Novo", null, null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-striped table-hover table-bordered">
+    <caption>Lista dos posts cadastrados no blog.</caption>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Post</th>
+            <th>Categoria</th>
+            <th>Publicado Em</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>
+                    <h3>@Html.ActionLink(p.Titulo, "Visualiza", new { id = p.Id })</h3>
+                    <p>@p.Resumo</p>
+                </td>
+                <td>@p.Categoria</td>
+                <td>
+                    @if (p.Publicado)
+                    {
+                        @Html.Raw($"{p.DataPublicacao:dd/MM/yyyy}");
+                    }
+                    else
+                    {
+                        @Html.Raw("Não");
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Remover", "RemovePost", new { id = p.Id }) <br />
+                    @Html.ActionLink("Publicar", "PublicaPost", new { id = p.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Blog.Controllers
+namespace Blog.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class PostController : Controller
     {
         private DAO.PostDAO Dao;
