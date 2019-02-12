@@ -1,20 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Blog.DAO;
+using Blog.Infra;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class PostController : Controller
     {
-        private DAO.PostDAO Dao;
+        private BlogContext _context;
+        private PostDAO _dao;
 
         public PostController()
         {
-            Dao = new DAO.PostDAO();
+            _context = new BlogContext();
+            _dao = new PostDAO(_context);
         }
 
         public IActionResult Index()
         {
-            return View(Dao.Lista());
+            return View(_dao.Lista());
         }
 
         public IActionResult Novo()
@@ -27,7 +31,7 @@ namespace Blog.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Dao.Insere(novo);
+                _dao.Insere(novo);
 
                 return RedirectToAction("Index");
             }
@@ -37,19 +41,19 @@ namespace Blog.Areas.Admin.Controllers
 
         public IActionResult Categoria([Bind(Prefix = "id")] string categoria)
         {
-            return View("Index", Dao.FiltraPorCategoria(categoria));
+            return View("Index", _dao.FiltraPorCategoria(categoria));
         }
 
         public IActionResult RemovePost(int id)
         {
-            Dao.Remove(id);
+            _dao.Remove(id);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Visualiza(int id)
         {
-            return View(Dao.BuscaPorId(id));
+            return View(_dao.BuscaPorId(id));
         }
 
         [HttpPost]
@@ -57,7 +61,7 @@ namespace Blog.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Dao.Atualiza(post);
+                _dao.Atualiza(post);
 
                 return RedirectToAction("Index");
             }
@@ -67,7 +71,7 @@ namespace Blog.Areas.Admin.Controllers
 
         public IActionResult PublicaPost(int id)
         {
-            Dao.Publica(id);
+            _dao.Publica(id);
 
             return RedirectToAction("Index");
         }
@@ -75,9 +79,19 @@ namespace Blog.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult CategoriaAutocomplete(string termoDigitado)
         {
-            var model = Dao.ListaCategoriasQueContemTermo(termoDigitado);
+            var model = _dao.ListaCategoriasQueContemTermo(termoDigitado);
 
             return Json(model);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            base.Dispose(disposing);
         }
     }
 }
