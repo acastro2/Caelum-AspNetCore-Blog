@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
-using System;
-using System.IO;
 
 namespace Blog.Infra
 {
@@ -13,17 +10,11 @@ namespace Blog.Infra
 
         public DbSet<Models.Post> Posts { get; set; }
 
+        public BlogContext(DbContextOptions<BlogContext> options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            Console.WriteLine("teste");
-
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
-                                                   .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                                                   .AddEnvironmentVariables();
-            var configuration = builder.Build();
-
-            optionsBuilder.UseLoggerFactory(MyLoggerFactory)
-                          .UseSqlServer(configuration.GetConnectionString("Blog"));
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
         }
     }
 }

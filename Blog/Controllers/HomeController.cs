@@ -1,18 +1,15 @@
 ﻿using Blog.DAO;
-using Blog.Infra;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
-        private BlogContext _context;
         private PostDAO _dao;
 
-        public HomeController()
+        public HomeController(PostDAO dao)
         {
-            _context = new BlogContext();
-            _dao = new PostDAO(_context);
+            _dao = dao;
         }
 
         public IActionResult Index()
@@ -25,16 +22,6 @@ namespace Blog.Controllers
             ViewBag.Termo = termo;
 
             return View("Index", _dao.BuscaPeloTermo(termo));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-
-            base.Dispose(disposing);
         }
     }
 }
