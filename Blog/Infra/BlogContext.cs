@@ -17,5 +17,10 @@ namespace Blog.Infra
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Models.Usuario>().HasIndex(b => b.Email).IsUnique();
+        }
     }
 }
