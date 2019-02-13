@@ -20,7 +20,7 @@ namespace Blog.Infra
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Models.Usuario>().HasIndex(b => b.Email).IsUnique();
+            modelBuilder.Entity<Models.Usuario>().HasIndex(b => b.Nome).IsUnique();
         }
     }
 }

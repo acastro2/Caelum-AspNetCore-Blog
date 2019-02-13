@@ -16,7 +16,7 @@ namespace Blog.DAO
 
         public Usuario Busca(string login, string senha)
         {
-            return _context.Usuarios.Where(u => u.Email.Equals(login, StringComparison.CurrentCultureIgnoreCase) &&
+            return _context.Usuarios.Where(u => u.Nome.Equals(login, StringComparison.CurrentCultureIgnoreCase) &&
                                                 u.Senha.Equals(senha, StringComparison.CurrentCultureIgnoreCase))
                                     .FirstOrDefault();
         }
