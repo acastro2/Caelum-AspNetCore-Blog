@@ -20,5 +20,11 @@ namespace Blog.DAO
                                                 u.Senha.Equals(senha, StringComparison.CurrentCultureIgnoreCase))
                                     .FirstOrDefault();
         }
+
+        public void Adiciona(Usuario usuario)
+        {
+            _context.Usuarios.Add(usuario);
+            _context.SaveChanges();
+        }
     }
 }

@@ -1,0 +1,8 @@
+﻿@model RegistroViewModel;
+
+@using (Html.BeginForm("Cadastra", "Usuario"))
+{
+    @Html.EditorFor(p => p);
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+}
