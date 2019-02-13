@@ -1,11 +1,13 @@
 ﻿using Blog.DAO;
 using Blog.Filters;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Blog.Areas.Admin.Controllers
 {
-    [AutorizacaoFilter]
     [Area("Admin")]
+    [AutorizacaoFilter]
     public class PostController : Controller
     {
         private PostDAO _dao;
@@ -30,7 +32,9 @@ namespace Blog.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dao.Insere(novo);
+                var usuario = JsonConvert.DeserializeObject<Models.Usuario>(HttpContext.Session.GetString("usuario"));
+
+                _dao.Insere(novo, usuario);
 
                 return RedirectToAction("Index");
             }

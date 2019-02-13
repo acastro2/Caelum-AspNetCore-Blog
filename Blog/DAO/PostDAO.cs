@@ -48,8 +48,11 @@ namespace Blog.DAO
             return _context.Posts.Where(p => p.Publicado && (p.Categoria.Contains(termo, StringComparison.CurrentCultureIgnoreCase) || p.Titulo.Contains(termo, StringComparison.CurrentCultureIgnoreCase))).ToList();
         }
 
-        public void Insere(Post post)
+        public void Insere(Post post, Usuario autor)
         {
+            _context.Usuarios.Attach(autor);
+            post.Autor = autor;
+
             _context.Posts.Add(post);
             _context.SaveChanges();
         }
