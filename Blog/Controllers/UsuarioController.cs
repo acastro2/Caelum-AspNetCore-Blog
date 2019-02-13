@@ -1,10 +1,18 @@
-﻿using Blog.Models;
+﻿using Blog.DAO;
+using Blog.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
     public class UsuarioController : Controller
     {
+        private readonly UsuarioDAO _dao;
+
+        public UsuarioController(UsuarioDAO dao)
+        {
+            _dao = dao;
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -16,7 +24,16 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Post", new { area = "Admin" });
+                var usuario = _dao.Busca(model.Login, model.Senha);
+
+                if (usuario != null)
+                {
+                    return RedirectToAction("Index", "Post", new { area = "Admin" });
+                }
+                else
+                {
+                    ModelState.AddModelError("login.Invalido", "Login ou senha incorretos");
+                }
             }
 
             return View("Login", model);

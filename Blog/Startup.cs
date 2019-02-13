@@ -36,6 +36,7 @@ namespace Blog
                 optionsAction.UseSqlServer(Configuration.GetConnectionString("Blog")));
 
             services.AddTransient<PostDAO>();
+            services.AddTransient<UsuarioDAO>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

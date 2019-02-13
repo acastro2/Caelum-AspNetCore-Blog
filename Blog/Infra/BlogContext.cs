@@ -9,6 +9,7 @@ namespace Blog.Infra
         public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 
         public DbSet<Models.Post> Posts { get; set; }
+        public DbSet<Models.Usuario> Usuarios { get; set; }
 
         public BlogContext(DbContextOptions<BlogContext> options) : base(options) { }
 

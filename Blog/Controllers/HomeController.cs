@@ -5,7 +5,7 @@ namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
-        private PostDAO _dao;
+        private readonly PostDAO _dao;
 
         public HomeController(PostDAO dao)
         {
