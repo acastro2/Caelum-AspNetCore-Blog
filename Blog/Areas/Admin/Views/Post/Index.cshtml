@@ -25,7 +25,12 @@
                     <p>@p.Resumo</p>
                 </td>
                 <td>@p.Categoria</td>
-                <td>@p.Autor?.Nome</td>
+                <td>
+                    @if (p.Autor != null)
+                    {
+                        @p.Autor.Nome
+                    }
+                </td>
                 <td>
                     @if (p.Publicado)
                     {

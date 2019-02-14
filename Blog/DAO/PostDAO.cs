@@ -18,7 +18,7 @@ namespace Blog.DAO
 
         public IList<Post> Lista()
         {
-            return _context.Posts.ToList();
+            return _context.Posts.Include(b => b.Autor).ToList();
         }
 
         public IEnumerable<Post> ListaPublicados()
