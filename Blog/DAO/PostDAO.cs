@@ -21,7 +21,7 @@ namespace Blog.DAO
             return _context.Posts.Include(b => b.Autor).ToList();
         }
 
-        public IEnumerable<Post> ListaPublicados()
+        public IList<Post> ListaPublicados()
         {
             return _context.Posts.Where(p => p.Publicado)
                                 .OrderByDescending(p => p.DataPublicacao)

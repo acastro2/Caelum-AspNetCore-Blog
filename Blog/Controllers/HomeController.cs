@@ -23,5 +23,10 @@ namespace Blog.Controllers
 
             return View("Index", _dao.BuscaPeloTermo(termo));
         }
+
+        public IActionResult Categoria([Bind(Prefix = "id")] string categoria)
+        {
+            return View("Index", _dao.FiltraPorCategoria(categoria));
+        }
     }
 }
