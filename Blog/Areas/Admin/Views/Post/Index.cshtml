@@ -10,6 +10,7 @@
             <th>Id</th>
             <th>Post</th>
             <th>Categoria</th>
+            <th>Autor</th>
             <th>Publicado Em</th>
             <th>Ação</th>
         </tr>
@@ -24,6 +25,7 @@
                     <p>@p.Resumo</p>
                 </td>
                 <td>@p.Categoria</td>
+                <td>@p.Autor?.Nome</td>
                 <td>
                     @if (p.Publicado)
                     {

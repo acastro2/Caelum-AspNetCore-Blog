@@ -1,8 +1,8 @@
 ﻿using Blog.DAO;
+using Blog.Extensions;
 using Blog.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Blog.Areas.Admin.Controllers
 {
@@ -32,7 +32,7 @@ namespace Blog.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = JsonConvert.DeserializeObject<Models.Usuario>(HttpContext.Session.GetString("usuario"));
+                var usuario = HttpContext.Session.Get<Models.Usuario>("usuario");
 
                 _dao.Insere(novo, usuario);
 

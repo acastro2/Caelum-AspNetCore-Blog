@@ -1,8 +1,8 @@
 ﻿using Blog.DAO;
+using Blog.Extensions;
 using Blog.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Blog.Controllers
 {
@@ -30,7 +30,7 @@ namespace Blog.Controllers
 
                 if (usuario != null)
                 {
-                    HttpContext.Session.SetString("usuario", JsonConvert.SerializeObject(usuario));
+                    HttpContext.Session.Set("usuario", usuario);
                     return RedirectToAction("Index", "Post", new { area = "Admin" });
                 }
                 else
