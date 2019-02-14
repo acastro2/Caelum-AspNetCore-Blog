@@ -50,8 +50,11 @@ namespace Blog.DAO
 
         public void Insere(Post post, Usuario autor)
         {
-            _context.Usuarios.Attach(autor);
-            post.Autor = autor;
+            if (autor != null)
+            {
+                _context.Usuarios.Attach(autor);
+                post.Autor = autor;
+            }
 
             _context.Posts.Add(post);
             _context.SaveChanges();
