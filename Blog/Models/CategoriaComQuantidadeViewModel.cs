@@ -11,7 +11,7 @@ namespace Blog.Models
         {
             categoriaPorQuantidade = new Dictionary<string, int>();
 
-            posts.GroupBy(p => p.Categoria).ToList()
+            posts.GroupBy(p => p.Categoria.Trim()).ToList()
                  .ForEach(o => categoriaPorQuantidade.Add(o.First().Categoria, o.Count()));
         }
 
